@@ -30,8 +30,14 @@ if st.button("🔊 اضغط هنا لسماع التعليمات الصوتية"
 
 st.markdown("---")
 
-# مصفوفة بجميع الاحتمالات الممكنة لاسم ملف الإكسيل (حروف كبيرة أو صغيرة أو امتداد مزدوج)
-excel_options = ["data.xlsx", "Data.xlsx", "data.xlsx.xlsx", "Data.xlsx.xlsx"]
+# مصفوفة تشمل الاسم المرفوع على جيت هوب بالظبط بحروف كبيرة بالكامل لضمان التشغيل المباشر
+excel_options = [
+    "DATA.xlsx",
+    "Data.xlsx", 
+    "data.xlsx", 
+    "DATA.xlsx.xlsx",
+    os.path.join(os.getcwd(), "DATA.xlsx")
+]
 
 selected_excel = None
 for option in excel_options:
@@ -89,7 +95,7 @@ if selected_excel:
                             f"""
                             <div style="text-align: center; margin-top: 10px;">
                                 <a href="{map_url}" target="_blank">
-                                    <img src="app/static/{qr_image_url}" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={map_url}'" alt="QR Code الخريطة" style="width: 150px; border: 3px solid #FF4B4B; padding: 5px; border-radius: 10px; cursor: pointer;">
+                                    <img src="https://raw.githubusercontent.com/{st.experimental_user.to_dict().get('username', 'mariamemammohamed-oss')}/electoral-ai/main/{qr_image_url}" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={map_url}'" alt="QR Code الخريطة" style="width: 150px; border: 3px solid #FF4B4B; padding: 5px; border-radius: 10px; cursor: pointer;">
                                 </a>
                                 <p style="color: gray; font-size: 12px; margin-top: 5px;">(اضغط على الخريطة لتحديد موقعك والتعرف على مدرستك الأقرب والمسافة)</p>
                             </div>
@@ -102,6 +108,6 @@ if selected_excel:
                     st.warning("برجاء إدخال الرقم التعريفي أولاً.")
                     
     except Exception as e:
-        st.error(f"حدث خطأ أثناء قراءة البيانات: {e}. تأكدي من إغلاق ملف الإكسيل لو كنتِ فتحاه على جهازك.")
+        st.error(f"حدث خطأ أثناء قراءة البيانات: {e}.")
 else:
-    st.error("❌ ملف البيانات غير موجود في المجلد الحالي. تأكدي من أن ملف الإكسيل موجود بجانب الكود المسمى app.py")
+    st.error("❌ ملف البيانات غير موجود. تأكدي من أن الملف مرفوع بنفس الاسم الحالي على جيت هوب.")
