@@ -88,16 +88,17 @@ if selected_excel:
                         st.markdown("---")
                         st.subheader("📍 الخريطة الانتخابية والوصول للمركز")
                         
-                        qr_image_url = "qrcode.png"  
                         map_url = "https://www.arcgis.com/apps/instant/nearby/index.html?appid=565a2a9c65624173ad93ccf419041ff5&sliderDistance=5"
+                        # توليد كود QR مباشر وآمن من الإنترنت تماماً
+                        online_qr = f"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={map_url}"
                         
                         st.markdown(
                             f"""
                             <div style="text-align: center; margin-top: 10px;">
                                 <a href="{map_url}" target="_blank">
-                                    <img src="https://raw.githubusercontent.com/{st.experimental_user.to_dict().get('username', 'mariamemammohamed-oss')}/electoral-ai/main/{qr_image_url}" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={map_url}'" alt="QR Code الخريطة" style="width: 150px; border: 3px solid #FF4B4B; padding: 5px; border-radius: 10px; cursor: pointer;">
+                                    <img src="{online_qr}" alt="QR Code الخريطة" style="width: 150px; border: 3px solid #FF4B4B; padding: 5px; border-radius: 10px; cursor: pointer;">
                                 </a>
-                                <p style="color: gray; font-size: 12px; margin-top: 5px;">(اضغط على الخريطة لتحديد موقعك والتعرف على مدرستك الأقرب والمسافة)</p>
+                                <p style="color: gray; font-size: 14px; margin-top: 8px; font-weight: bold;">(اضغطي على صورة الـ QR Code المربع فوق لتفتح الخريطة التفاعلية فوراً)</p>
                             </div>
                             """, 
                             unsafe_allow_html=True
@@ -110,4 +111,4 @@ if selected_excel:
     except Exception as e:
         st.error(f"حدث خطأ أثناء قراءة البيانات: {e}.")
 else:
-    st.error("❌ ملف البيانات غير موجود. تأكدي من أن الملف مرفوع بنفس الاسم الحالي على جيت هوب.")
+    st.error("❌ ملف البيانات غير موجود. تأكدي من أن الملف مرفوع بنجاح على جيت هوب.")
